@@ -3,6 +3,7 @@ import { Navigation } from "./components/Navigation/Navigation";
 import { SettingsPanel } from "./components/Settings/Settings";
 import { Input } from "./components/Input/Input";
 import { Play } from "./components/Play/Play";
+import { Quiz } from "./components/Quiz/Quiz";
 
 type TextData = {
   text: string;
@@ -23,9 +24,16 @@ export default function App() {
   const [speed, setSpeed] = useState(1.0);
   const [parsedData, setParsedData] = useState<TextData[]>([]);
 
+  // Etat pour afficher la modale du Quiz
+  const [showQuizModal, setShowQuizModal] = useState(false);
+
   const handleParsedData = (data: TextData[]) => {
     console.log("Received parsed data:", data);
     setParsedData(data);
+  };
+
+  const handleQuizToggle = () => {
+    setShowQuizModal(!showQuizModal);
   };
 
   return (
@@ -37,6 +45,7 @@ export default function App() {
           darkMode={darkMode}
           setDarkMode={setDarkMode}
           currentPage={currentPage}
+          onQuizToggle={handleQuizToggle} // Ajoutez cette ligne
         />
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
@@ -76,6 +85,27 @@ export default function App() {
           speed={speed}
           onSpeedChange={setSpeed}
         />
+
+        {showQuizModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md w-full">
+              {/* Bouton de fermeture */}
+              <Quiz
+                questions={[
+                  { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correctAnswer: 1 },
+                  { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Lisbon"], correctAnswer: 2 },
+                ]}
+                onQuizComplete={(score, total) => {
+                  alert(`Quiz completed! Score: ${score} / ${total}`);
+                  setShowQuizModal(false);
+                }}
+                fontText={fontText}
+                onClose={handleQuizToggle}
+                darkMode={darkMode}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
