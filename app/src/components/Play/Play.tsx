@@ -78,10 +78,10 @@ export const Play = ({
   }, [currentLine, soundEnabled]);
 
   useEffect(() => {
-    if (hapticFeedback && window.navigator.vibrate) {
-      window.navigator.vibrate(100);
+    if (hapticFeedback && window.navigator.vibrate && parsedData[currentLine]?.isBold) {
+      window.navigator.vibrate(100); // Vibrate for 100ms
     }
-  }, [currentLine, hapticFeedback]);
+  }, [currentLine, hapticFeedback, parsedData]);
 
   useEffect(() => {
     if (autoMode) {
@@ -119,14 +119,14 @@ export const Play = ({
             }}
             className={`my-6 transition-all duration-500 ${
               index === currentLine
-                ? "text-8xl font-extrabold text-blue-500 shadow-lg" // Texte principal en gros avec glow
+                ? "text-8xl font-extrabold text-blue-500" // Texte principal en gros avec glow
                 : index === currentLine - 1 || index === currentLine + 1
                 ? "text-5xl font-semibold text-gray-400" // Texte juste avant et après
                 : "text-2xl text-gray-600 opacity-60" // Autres lignes discrètes mais visibles
             } ${line.isBold ? "font-bold" : ""} ${fontText ? "font-dyslexic" : ""}`}
             style={{
               fontSize: index === currentLine ? `${line.size + 30}px` : index === currentLine - 1 || index === currentLine + 1 ? `${line.size + 15}px` : `${line.size}px`,
-              textShadow: index === currentLine ? "0px 0px 15px rgba(0, 0, 255, 0.5)" : "none", // Glow sur le texte principal 🔥
+              textShadow: index === currentLine ? "0px 0px 15px rgba(0, 0, 255, 0.5)" : "none", // Glow sur le texte principal
               fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
             }}
           >
