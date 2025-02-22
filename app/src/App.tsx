@@ -31,7 +31,7 @@ export default function App() {
           
           <div className="flex-1 overflow-auto p-4">
             {currentPage === 'input' ? 
-              <Input darkMode={darkMode} /> : 
+              <Input darkMode={darkMode} maxStringSize={80}/> : 
               <Play darkMode={darkMode} />}
           </div>
         </div>
