@@ -31,8 +31,14 @@ export const SettingsPanel = ({
   speed,
   onSpeedChange,
 }: SettingsPanelProps) => {
+
+  const textStyle = {
+    fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
+  };
+
   return (
     <div
+      style={textStyle}
       className={`fixed left-0 top-0 h-full w-64 ${
         darkMode ? 'bg-gray-900' : 'bg-gray-800'
       } text-white p-4 transform transition-transform duration-300 ${
@@ -66,7 +72,7 @@ export const SettingsPanel = ({
       <nav className="space-y-6">
         {/* Font Size Toggle */}
         <div className="flex items-center justify-between">
-        <span className="text-sm">Police dyslexique</span>
+          <span className="text-sm">Police dyslexique</span>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
               type="checkbox"

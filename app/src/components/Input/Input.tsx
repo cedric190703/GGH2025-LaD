@@ -5,6 +5,7 @@ type InputPageProps = {
   maxStringSize: number;
   onParsed: (data: TextData[]) => void;
   onQuizParsed: (quiz: QuizData[]) => void;
+  fontText: boolean;
 };
 
 type TextData = {
@@ -24,9 +25,14 @@ export const Input = ({
   maxStringSize,
   onParsed,
   onQuizParsed,
+  fontText, // Acceptez la prop ici
 }: InputPageProps) => {
   const [textData, setTextData] = useState<TextData[]>([]);
   const [quizData, setQuizData] = useState<QuizData[]>([]);
+
+  const textStyle = {
+    fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
+  };
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -133,19 +139,15 @@ export const Input = ({
   const parseCsvQuiz = (csv: string) => {
     const lines = csv.split("\n");
     const result: QuizData[] = [];
-  
+
     lines.forEach((line) => {
-      // Split the line by the '|' delimiter
       const parts = line.split("|").map((part) => part.trim());
-  
+
       if (parts.length >= 3) {
         const question = parts[0];
-  
-        // Split the options part by commas to get individual options
         const options = parts[1].split(",").map((option) => option.trim());
-  
-        const correctAnswer = parseInt(parts[2], 10) - 1; // Last part is the correct answer index
-  
+        const correctAnswer = parseInt(parts[2], 10) - 1;
+
         result.push({
           question,
           options,
@@ -153,7 +155,7 @@ export const Input = ({
         });
       }
     });
-  
+
     setQuizData(result);
     onQuizParsed(result);
     console.log("Parsed CSV Quiz Data:", result);
@@ -162,19 +164,15 @@ export const Input = ({
   const parsePlainTextQuiz = (content: string) => {
     const lines = content.split("\n");
     const result: QuizData[] = [];
-  
+
     lines.forEach((line) => {
-      // Split the line by the '|' delimiter
       const parts = line.split("|").map((part) => part.trim());
-  
+
       if (parts.length >= 3) {
         const question = parts[0];
-  
-        // Split the options part by commas to get individual options
         const options = parts[1].split(",").map((option) => option.trim());
+        const correctAnswer = parseInt(parts[2], 10) - 1;
 
-        const correctAnswer = parseInt(parts[2], 10) - 1; // Last part is the correct answer index
-  
         result.push({
           question,
           options,
@@ -182,14 +180,14 @@ export const Input = ({
         });
       }
     });
-  
+
     setQuizData(result);
     onQuizParsed(result);
     console.log("Parsed Plain Text Quiz Data:", result);
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div style={textStyle} className="p-6 max-w-2xl mx-auto">
       <div
         className={`rounded-xl p-6 ${
           darkMode

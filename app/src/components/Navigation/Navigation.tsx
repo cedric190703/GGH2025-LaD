@@ -8,6 +8,7 @@ interface NavigationProps {
   currentPage: 'input' | 'play';
   onQuizToggle: () => void;
   hasQuizData: boolean;
+  fontText: boolean;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
@@ -18,9 +19,15 @@ export const Navigation: React.FC<NavigationProps> = ({
   currentPage,
   onQuizToggle,
   hasQuizData,
+  fontText
 }) => {
+
+  const textStyle = {
+    fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
+  };
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+    <div  style={textStyle}  className="flex flex-col md:flex-row items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
       <div className="flex items-center justify-between w-full md:w-auto gap-4">
         {/* Menu Button */}
         <button

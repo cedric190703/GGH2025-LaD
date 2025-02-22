@@ -64,9 +64,13 @@ export const Quiz: React.FC<QuizProps> = ({
 
   const currentQuestion = questions[currentQuestionIndex];
 
+  const textStyle = {
+    fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
+  };
+
   if (showResults) {
     return (
-      <div className={`p-6 rounded-lg ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+      <div style={textStyle} className={`p-6 rounded-lg ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
         <h2 className="text-2xl font-bold mb-4">Résultats du Quiz</h2>
         <div className="mb-6">
           <p className="text-lg font-semibold">
@@ -146,7 +150,7 @@ export const Quiz: React.FC<QuizProps> = ({
   }
 
   return (
-    <div className={`p-6 rounded-lg ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+    <div style={textStyle} className={`p-6 rounded-lg ${darkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Question {currentQuestionIndex + 1}/{questions.length}</h2>
         <span className="text-lg font-semibold">

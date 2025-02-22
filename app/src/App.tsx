@@ -59,6 +59,7 @@ export default function App() {
           currentPage={currentPage}
           onQuizToggle={handleQuizToggle}
           hasQuizData={quizData.length > 0}
+          fontText={fontText}
         />
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
@@ -69,6 +70,7 @@ export default function App() {
                 maxStringSize={80}
                 onParsed={handleParsedData}
                 onQuizParsed={handleQuizParsed}
+                fontText={fontText}
               />
             ) : (
               <Play
