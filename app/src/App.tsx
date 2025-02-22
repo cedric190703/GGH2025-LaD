@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Navigation } from "./components/Navigation/Navigation";
 import { SettingsPanel } from "./components/Settings/Settings";
 import { Input } from "./components/Input/Input";
 import { Play } from "./components/Play/Play";
+
+type TextData = {
+  text: string;
+  size: number;
+  isBold: boolean;
+};
 
 export default function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -15,6 +21,12 @@ export default function App() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [autoMode, setAutoMode] = useState(false);
   const [speed, setSpeed] = useState(1.0);
+  const [parsedData, setParsedData] = useState<TextData[]>([]);
+
+  const handleParsedData = (data: TextData[]) => {
+    console.log("Received parsed data:", data);
+    setParsedData(data);
+  };
 
   return (
     <div className={`h-screen ${darkMode ? 'dark' : ''}`}>
@@ -29,9 +41,23 @@ export default function App() {
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
           <div className="flex-1 overflow-auto p-4">
-            {currentPage === 'input' ? 
-              <Input darkMode={darkMode} maxStringSize={80}/> : 
-              <Play darkMode={darkMode} />}
+            {currentPage === 'input' ? (
+              <Input
+                darkMode={darkMode}
+                maxStringSize={80}
+                onParsed={handleParsedData}
+              />
+            ) : (
+              <Play
+                darkMode={darkMode}
+                fontText={fontText}
+                hapticFeedback={hapticFeedback}
+                soundEnabled={soundEnabled}
+                autoMode={autoMode}
+                speed={speed}
+                parsedData={parsedData}
+              />
+            )}
           </div>
         </div>
 

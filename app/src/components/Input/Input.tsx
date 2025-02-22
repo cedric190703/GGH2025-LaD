@@ -3,6 +3,7 @@ import React, { useState } from "react";
 type InputPageProps = {
   darkMode: boolean;
   maxStringSize: number; // Maximum size of each string
+  onParsed: (data: TextData[]) => void;
 };
 
 type TextData = {
@@ -11,7 +12,11 @@ type TextData = {
   isBold: boolean;
 };
 
-export const Input = ({ darkMode, maxStringSize }: InputPageProps) => {
+export const Input = ({
+    darkMode, 
+    maxStringSize, 
+    onParsed
+  }: InputPageProps) => {
   const [textData, setTextData] = useState<TextData[]>([]);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +54,7 @@ const parseMarkdown = (markdown: string, maxStringSize: number) => {
   });
 
   setTextData(result);
+  onParsed(result);
   console.log("Parsed Markdown Data:", result);
 };
 
