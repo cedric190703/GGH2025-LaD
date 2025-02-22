@@ -54,7 +54,6 @@ export const Play = ({
       }
     });
 
-    // If near the bottom, set the last line as active
     if (container.scrollHeight - container.scrollTop <= container.clientHeight + 20) {
       closestIndex = parsedData.length - 1;
     }
@@ -80,7 +79,7 @@ export const Play = ({
 
   useEffect(() => {
     if (hapticFeedback && window.navigator.vibrate) {
-      window.navigator.vibrate(100); // Vibrate for 100ms
+      window.navigator.vibrate(100);
     }
   }, [currentLine, hapticFeedback]);
 
@@ -88,11 +87,11 @@ export const Play = ({
     if (autoMode) {
       const scrollContainer = () => {
         if (containerRef.current) {
-          containerRef.current.scrollTop += speed * 2; // Increase the scroll amount
+          containerRef.current.scrollTop += speed * 2;
         }
       };
 
-      autoScrollRef.current = window.setInterval(scrollContainer, 50); // Decrease the interval
+      autoScrollRef.current = window.setInterval(scrollContainer, 50);
 
       return () => {
         if (autoScrollRef.current) {
@@ -111,7 +110,7 @@ export const Play = ({
           fontText ? "font-dyslexic" : ""
         }`}
       >
-        <div className="h-[50vh]"></div> {/* Empty space at the top */}
+        <div className="h-[50vh]"></div> {/* Espace vide en haut */}
         {parsedData.map((line, index) => (
           <p
             key={index}
@@ -120,23 +119,21 @@ export const Play = ({
             }}
             className={`my-6 transition-all duration-500 ${
               index === currentLine
-                ? "text-6xl font-black text-blue-500 scale-150 shadow-xl animate-bounce"
-                : "text-base opacity-60"
-            } ${line.isBold ? 'font-bold' : ''} ${
-              index === currentLine - 1 || index === currentLine + 1
-                ? "text-lg opacity-80"
-                : "text-sm opacity-40"
-            }`}
+                ? "text-8xl font-extrabold text-blue-500 shadow-lg" // Texte principal en gros avec glow
+                : index === currentLine - 1 || index === currentLine + 1
+                ? "text-5xl font-semibold text-gray-400" // Texte juste avant et après
+                : "text-2xl text-gray-600 opacity-60" // Autres lignes discrètes mais visibles
+            } ${line.isBold ? "font-bold" : ""} ${fontText ? "font-dyslexic" : ""}`}
             style={{
-              fontSize: `${line.size}px`,
-              transition: 'opacity 0.5s ease, transform 0.5s ease',
-              transform: index === currentLine ? 'scale(1.5)' : 'scale(1)',
+              fontSize: index === currentLine ? `${line.size + 30}px` : index === currentLine - 1 || index === currentLine + 1 ? `${line.size + 15}px` : `${line.size}px`,
+              textShadow: index === currentLine ? "0px 0px 15px rgba(0, 0, 255, 0.5)" : "none", // Glow sur le texte principal 🔥
+              fontFamily: fontText ? '"OpenDyslexic", sans-serif' : "inherit",
             }}
           >
             {line.text}
           </p>
         ))}
-        <div className="h-[50vh]"></div> {/* Empty space at the bottom */}
+        <div className="h-[50vh]"></div> {/* Espace vide en bas */}
       </div>
     </div>
   );
