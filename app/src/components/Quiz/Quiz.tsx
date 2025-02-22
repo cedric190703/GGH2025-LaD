@@ -20,15 +20,17 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onQuizComplete, fontText,
   };
 
   const handleNext = () => {
-    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
-      setScore(score + 1);
-    }
+    setScore((prevScore) => {
+      const newScore = selectedAnswer === questions[currentQuestion].correctAnswer ? prevScore + 1 : prevScore;
+      return newScore;
+    });
+
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setCurrentQuestion((prevQuestion) => prevQuestion + 1);
       setSelectedAnswer(null);
       setIsAnswerLocked(false);
     } else {
-      onQuizComplete(score, questions.length);
+      onQuizComplete(score + (selectedAnswer === questions[currentQuestion].correctAnswer ? 1 : 0), questions.length);
     }
   };
 
@@ -56,9 +58,11 @@ export const Quiz: React.FC<QuizProps> = ({ questions, onQuizComplete, fontText,
                 isAnswerLocked
                   ? isSelected
                     ? isCorrect
-                      ? 'bg-green-500 hover:bg-green-600'
-                      : 'bg-red-500 hover:bg-red-600'
-                    : 'bg-gray-500 cursor-not-allowed'
+                      ? 'bg-green-500 hover:bg-green-600' // Good answer, user selected it
+                      : 'bg-red-500 hover:bg-red-600'    // Bad answer, user selected it
+                    : isCorrect
+                    ? 'bg-green-500 hover:bg-green-600'   // Correct answer, but not selected
+                    : 'bg-gray-500 cursor-not-allowed'    // Incorrect answer, not selected
                   : darkMode
                   ? 'bg-gray-700 text-white hover:bg-gray-600'
                   : 'bg-blue-500 text-white hover:bg-blue-600'

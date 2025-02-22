@@ -18,8 +18,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   onQuizToggle,
 }) => {
   return (
-    <div className="flex flex-wrap items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col md:flex-row items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <div className="flex items-center justify-between w-full md:w-auto gap-4">
         {/* Menu Button */}
         <button
           onClick={onSettingsToggle}
@@ -98,11 +98,11 @@ export const Navigation: React.FC<NavigationProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        {/* Quiz Button - placé à côté du toggle de thème */}
+      <div className="flex items-center gap-4 mt-4 md:mt-0">
+        {/* Quiz Button */}
         <button
           onClick={onQuizToggle}
-          className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-black dark:text-white transition-colors"
         >
           <svg
             className="w-5 h-5"
@@ -119,10 +119,11 @@ export const Navigation: React.FC<NavigationProps> = ({
           </svg>
           <span>Quiz</span>
         </button>
+
         {/* Dark Mode Toggle - Desktop */}
         <button
           onClick={() => setDarkMode(!darkMode)}
-          className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+          className="md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors hidden"
         >
           {darkMode ? (
             <>

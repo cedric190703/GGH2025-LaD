@@ -45,7 +45,7 @@ export default function App() {
           darkMode={darkMode}
           setDarkMode={setDarkMode}
           currentPage={currentPage}
-          onQuizToggle={handleQuizToggle} // Ajoutez cette ligne
+          onQuizToggle={handleQuizToggle}
         />
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
@@ -89,7 +89,6 @@ export default function App() {
         {showQuizModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md w-full">
-              {/* Bouton de fermeture */}
               <Quiz
                 questions={[
                   { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correctAnswer: 1 },
