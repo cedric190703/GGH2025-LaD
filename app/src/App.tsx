@@ -29,11 +29,17 @@ export default function App() {
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
           <div className="flex-1 overflow-auto p-4">
+<<<<<<< HEAD
+            {currentPage === 'input' ? 
+              <Input darkMode={darkMode} maxStringSize={80}/> : 
+              <Play darkMode={darkMode} />}
+=======
             {currentPage === 'input' ? (
               <Input darkMode={darkMode} />
             ) : (
               <Play darkMode={darkMode} />
             )}
+>>>>>>> origin/main
           </div>
         </div>
 
