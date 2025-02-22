@@ -25,6 +25,7 @@ export const Play = ({ darkMode }: PlayPageProps) => {
   const [currentLine, setCurrentLine] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // Function to update currentLine based on scroll position
   const updateCurrentLine = () => {
@@ -69,8 +70,16 @@ export const Play = ({ darkMode }: PlayPageProps) => {
     };
   }, []);
 
+  // Play sound when currentLine changes
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  }, [currentLine]);
+
   return (
     <div className={`w-full h-screen ${darkMode ? "text-white bg-black" : "text-black bg-white"}`}>
+      <audio ref={audioRef} src="click.mp3" />
       <div
         ref={containerRef}
         className="w-full h-full overflow-y-auto text-center scroll-smooth scrollbar-hide"
