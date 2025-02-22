@@ -171,7 +171,7 @@ export const Play = ({
         {parsedData.map((line, index) => (
           <AnimatePresence key={index}>
             <motion.p
-              ref={(el) => {
+              ref={(el : any) => {
                 lineRefs.current[index] = el;
               }}
               initial={{ opacity: 0, y: 20 }}

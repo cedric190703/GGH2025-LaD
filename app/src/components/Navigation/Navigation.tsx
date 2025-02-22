@@ -7,6 +7,7 @@ interface NavigationProps {
   setDarkMode: (value: boolean) => void;
   currentPage: 'input' | 'play';
   onQuizToggle: () => void;
+  hasQuizData: boolean;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
@@ -16,6 +17,7 @@ export const Navigation: React.FC<NavigationProps> = ({
   setDarkMode,
   currentPage,
   onQuizToggle,
+  hasQuizData,
 }) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -100,25 +102,27 @@ export const Navigation: React.FC<NavigationProps> = ({
 
       <div className="flex items-center gap-4 mt-4 md:mt-0">
         {/* Quiz Button */}
-        <button
-          onClick={onQuizToggle}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-black dark:text-white transition-colors"
-        >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        {hasQuizData && (
+          <button
+            onClick={onQuizToggle}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-black dark:text-white transition-colors"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <span>Quiz</span>
-        </button>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Quiz</span>
+          </button>
+        )}
 
         {/* Dark Mode Toggle */}
         <button

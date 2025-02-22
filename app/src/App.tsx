@@ -11,6 +11,12 @@ type TextData = {
   isBold: boolean;
 };
 
+type QuizData = {
+  question: string;
+  options: string[];
+  correctAnswer: number;
+};
+
 export default function App() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<'input' | 'play'>('input');
@@ -23,6 +29,7 @@ export default function App() {
   const [autoMode, setAutoMode] = useState(false);
   const [speed, setSpeed] = useState(1.0);
   const [parsedData, setParsedData] = useState<TextData[]>([]);
+  const [quizData, setQuizData] = useState<QuizData[]>([]);
 
   // Etat pour afficher la modale du Quiz
   const [showQuizModal, setShowQuizModal] = useState(false);
@@ -30,6 +37,11 @@ export default function App() {
   const handleParsedData = (data: TextData[]) => {
     console.log("Received parsed data:", data);
     setParsedData(data);
+  };
+
+  const handleQuizParsed = (data: QuizData[]) => {
+    console.log("Received quiz data:", data);
+    setQuizData(data);
   };
 
   const handleQuizToggle = () => {
@@ -46,6 +58,7 @@ export default function App() {
           setDarkMode={setDarkMode}
           currentPage={currentPage}
           onQuizToggle={handleQuizToggle}
+          hasQuizData={quizData.length > 0}
         />
 
         <div className="flex-1 flex flex-col overflow-auto transition-margin duration-300">
@@ -55,6 +68,7 @@ export default function App() {
                 darkMode={darkMode}
                 maxStringSize={80}
                 onParsed={handleParsedData}
+                onQuizParsed={handleQuizParsed}
               />
             ) : (
               <Play
@@ -86,14 +100,11 @@ export default function App() {
           onSpeedChange={setSpeed}
         />
 
-        {showQuizModal && (
+        {showQuizModal && quizData.length > 0 && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="relative bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md w-full">
               <Quiz
-                questions={[
-                  { question: "What is 2 + 2?", options: ["3", "4", "5", "6"], correctAnswer: 1 },
-                  { question: "What is the capital of France?", options: ["Berlin", "Madrid", "Paris", "Lisbon"], correctAnswer: 2 },
-                ]}
+                questions={quizData}
                 onQuizComplete={(score, total) => {
                   alert(`Quiz completed! Score: ${score} / ${total}`);
                   setShowQuizModal(false);
