@@ -75,5 +75,4 @@ La dyslexie est un trouble de la lecture qui touche une **part importante de la 
 ---
 
 ## 🚀 Conclusion
-Notre application offre une **expérience de lecture révolutionnaire**, qui allie **accessibilité, interactivité et stimulation cérébrale**.  
-En s’appuyant sur **les neurosciences et la technologie**, nous avons conçu une solution qui **facilite l’apprentissage et l’accès à l’information** pour tous.
+Notre application offre une **expérience de lecture accessible et simple**, qui allie **accessibilité, interactivité et stimulation cérébrale**.  
