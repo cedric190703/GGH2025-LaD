@@ -1,4 +1,4 @@
-# 📖 Présentation de l'Application
+# 📖 Présentation de l'Application pour le projet Hackathon GGH2025 - Epita
 
 ## 🚀 Un Lecteur de Texte Innovant
 Nous avons conçu une application qui **réinvente la lecture** pour la rendre :
@@ -72,6 +72,7 @@ La dyslexie est un trouble de la lecture qui touche une **part importante de la 
 - 🔥 **Scalabilité** : Déploiement facile sur diverses plateformes (mobile, web)  
 - 💡 **Monétisation** : version premium et pr, partenariats éducatifs, licences professionnelles
 
+## Tests sur l'application avec le fichier **sample_text.md** pour la partie lecture et avec le fichier **sample_quiz.txt** pour la partie Quiz.
 ---
 
 ## 🚀 Conclusion

@@ -1,0 +1,5 @@
+Quelle est la capitale de la France?|Paris,Londres,Berlin,Madrid|1
+Quel est le plus grand océan du monde?|Atlantique,Pacifique,Indien,Arctique|2
+Quel est le symbole chimique de l'eau?|H2O,O2,CO2,H2|1
+Quel est le plus grand mammifère terrestre?|Éléphant,Baleine,Girafe,Rhinocéros|2
+Quel est le principal gaz de l'atmosphère terrestre?|Oxygène,Azote,Dioxyde de carbone,Hydrogène|2
